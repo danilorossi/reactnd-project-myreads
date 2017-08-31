@@ -6,15 +6,15 @@ class BookFooter extends React.Component {
     return (
       <div className="book-footer">
         <div className="book-title">{ this.props.title }</div>
-        <div className="book-authors">{ this.props.authors }</div>
+        {this.props.authors.map( (author, i) => <div key={i} className="book-authors">{ author }</div> )}
       </div>
     )
   }
 }
 
 BookFooter.propTypes = {
-  imageWidth: PropTypes.number,
-  imageHeight: PropTypes.number,
+  title: PropTypes.string.isRequired,
+  authors: PropTypes.array.isRequired,
 };
 
 export default BookFooter;

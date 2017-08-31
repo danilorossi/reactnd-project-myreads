@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom'
 import Book from '../common/book/Book'
 
 class HomePage extends React.Component {
+
+
   render() {
+      
     return (
       <div className="list-books">
         <div className="list-books-title">
@@ -36,10 +39,12 @@ class HomePage extends React.Component {
                   </li>
                   <li>
                     <Book
-                      imageURL={'http://books.google.com/books/content?id=yDtCuFHXbAYC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72RRiTR6U5OUg3IY_LpHTL2NztVWAuZYNFE8dUuC0VlYabeyegLzpAnDPeWxE6RHi0C2ehrR9Gv20LH2dtjpbcUcs8YnH5VCCAH0Y2ICaKOTvrZTCObQbsfp4UbDqQyGISCZfGN&source=gbs_api'}
-                      title={'Ender\'s Game'}
-                      authors={'Orson Scott Card'}
-                    />
+                      meta={{
+                        imageURL: 'http://books.google.com/books/content?id=yDtCuFHXbAYC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72RRiTR6U5OUg3IY_LpHTL2NztVWAuZYNFE8dUuC0VlYabeyegLzpAnDPeWxE6RHi0C2ehrR9Gv20LH2dtjpbcUcs8YnH5VCCAH0Y2ICaKOTvrZTCObQbsfp4UbDqQyGISCZfGN&source=gbs_api',
+                        title : 'Ender\'s Game',
+                        authors : ['Orson Scott Card']
+                      }} />
+
                   </li>
                 </ol>
               </div>
