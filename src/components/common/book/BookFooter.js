@@ -1,0 +1,20 @@
+import React from 'react'
+import { PropTypes } from 'prop-types'
+
+class BookFooter extends React.Component {
+  render() {
+    return (
+      <div className="book-footer">
+        <div className="book-title">{ this.props.title }</div>
+        <div className="book-authors">{ this.props.authors }</div>
+      </div>
+    )
+  }
+}
+
+BookFooter.propTypes = {
+  imageWidth: PropTypes.number,
+  imageHeight: PropTypes.number,
+};
+
+export default BookFooter;

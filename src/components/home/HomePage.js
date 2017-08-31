@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import Book from '../common/Book'
+import Book from '../common/book/Book'
 
 class HomePage extends React.Component {
   render() {
