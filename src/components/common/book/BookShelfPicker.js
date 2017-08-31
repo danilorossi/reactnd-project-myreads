@@ -2,6 +2,7 @@ import React from 'react'
 import { PropTypes } from 'prop-types'
 
 class BookShelfPicker extends React.Component {
+  
   render() {
     return (
       <div className="book-shelf-changer">
