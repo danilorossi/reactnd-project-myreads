@@ -4,24 +4,18 @@ import {
   Route
 } from 'react-router-dom'
 
+import './App.css'
+
 import HomePage from './components/home/HomePage'
 import SearchPage from './components/search/SearchPage'
 
-// import * as BooksAPI from './BooksAPI'
-import './App.css'
-
-
-
 class BooksApp extends React.Component {
-  state = {
-
-  }
 
   render() {
     return (
       <Router>
         <div className="app">
-          <Route exact path="/" component={HomePage}/>
+          <Route exact path="/" component={HomePage} /> }/>
           <Route exact path="/search" component={SearchPage}/>
         </div>
       </Router>
