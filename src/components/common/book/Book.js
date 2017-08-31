@@ -4,23 +4,12 @@ import { PropTypes } from 'prop-types'
 import BookCover from './BookCover'
 import BookFooter from './BookFooter'
 import BookShelfPicker from './BookShelfPicker'
+import { bookshelfDefinition } from '../../../constants/bookshelf'
 
 class Book extends React.Component {
 
-  state = {
-    shelves: [{
-        id: 'currentlyReading',
-        name: 'Currently Reading'
-      }, {
-        id: 'wantToRead',
-        name: 'Want to Read'
-      }, {
-        id: 'read',
-        name: 'Read'
-      }]
-  }
-
   render() {
+
     return (
       <div className="book">
 
@@ -29,7 +18,7 @@ class Book extends React.Component {
           <BookCover imageURL={this.props.meta.imageURL} />
 
           <BookShelfPicker
-            shelves={this.state.shelves} />
+            shelves={bookshelfDefinition} />
 
         </div>
 
