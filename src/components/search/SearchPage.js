@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { PropTypes } from 'prop-types'
 
 import * as BooksAPI from '../../BooksAPI'
 import BookShelf from '../common/bookshelf/BookShelf'
@@ -18,10 +19,6 @@ class SearchPage extends React.Component {
     super(props)
     this.onQueryChange = this.onQueryChange.bind(this)
     this.searchBooks = debounce(200)(this.searchBooks)
-  }
-
-  componentDidMount() {
-
   }
 
   searchBooks(query) {
@@ -79,17 +76,21 @@ class SearchPage extends React.Component {
         </div>
         <div className="search-books-results">
 
-          { this.state.books && <BookShelf books={this.state.books} /> }
+          { this.state.books && <BookShelf changeShelf={this.props.changeShelf} books={this.state.books} /> }
           { this.state.noBooksFound &&
             <div className="no-books-found-message">
               <span>No books found!</span>
             </div>
           }
-          
+
         </div>
       </div>
     )
   }
+}
+
+SearchPage.propTypes = {
+  changeShelf: PropTypes.func.isRequired
 }
 
 export default SearchPage;

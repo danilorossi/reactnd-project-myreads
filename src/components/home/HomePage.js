@@ -7,17 +7,6 @@ import BookShelf from '../common/bookshelf/BookShelf'
 class HomePage extends React.Component {
 
   render() {
-    // const shelves = this.props.shelves
-    // console.log(shelves)
-    // const sortedShelves = (shelves && Object.keys(shelves).length > 0) ?
-    //   validBookshelves.map(
-    //     bookshelf => (
-    //       <BookShelf
-    //         key={bookshelf.id}
-    //         name={bookshelf.name}
-    //         books={shelves[bookshelf.id]} />
-    //     )
-    //   ) : []
 
     return (
       <div className="list-books">
@@ -30,6 +19,7 @@ class HomePage extends React.Component {
           <div>
             { this.props.shelves && this.props.shelves.map(shelf => (
               <BookShelf
+                changeShelf={this.props.changeShelf}
                 key={shelf.id}
                 name={shelf.name}
                 books={shelf.books} />
@@ -48,6 +38,7 @@ class HomePage extends React.Component {
 }
 
 HomePage.propTypes = {
+  changeShelf: PropTypes.func.isRequired,
   shelves: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,

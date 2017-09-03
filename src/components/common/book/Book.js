@@ -18,6 +18,8 @@ class Book extends React.Component {
           <BookCover imageURL={this.props.meta.imageURL} />
 
           <BookShelfPicker
+            bookId={this.props.meta.id}
+            changeShelf={this.props.changeShelf}
             currentShelf={this.props.meta.shelf}
             shelves={VALID_BOOKSHELVES} />
 
@@ -33,7 +35,7 @@ class Book extends React.Component {
 }
 
 Book.propTypes = {
-
+  changeShelf: PropTypes.func.isRequired,
   meta: PropTypes.shape({
     id: PropTypes.string.isRequired,
     shelf: PropTypes.string.isRequired,

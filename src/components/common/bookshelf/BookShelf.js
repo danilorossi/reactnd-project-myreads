@@ -16,6 +16,7 @@ class BookShelf extends React.Component {
               {this.props.books.map( book => ( // TODO get the fields in a smarter way
                 <li key={book.id}>
                   <Book
+                    changeShelf={this.props.changeShelf}
                     meta={{
                       id: book.id,
                       shelf: book.shelf,
@@ -46,7 +47,8 @@ BookShelf.propTypes = {
       title: PropTypes.string.isRequired,
       authors: PropTypes.arrayOf(PropTypes.string)
     })
-  ).isRequired
+  ).isRequired,
+  changeShelf: PropTypes.func.isRequired,
 };
 
 export default BookShelf;

@@ -17,16 +17,21 @@ import * as BooksAPI from './BooksAPI'
 class BooksApp extends React.Component {
 
   state = {
-    // TODO and pass it to search page ? idToShelfMapping: {},
+
     shelves: [
       // { id, name, books }
     ],
     bookShelfMappings: {
-
+      // <bookId> : <shelf>
     }
   }
 
-  changeShelf(book) {
+  constructor(props) {
+    super(props)
+    this.changeShelf = this.changeShelf.bind(this)
+  }
+  changeShelf(shelf, book) {
+    console.log('TODO changeShelf', shelf, book);
     // TODO
     // remove book from current shelf
     // add it to new shelf
@@ -57,9 +62,6 @@ class BooksApp extends React.Component {
 
         })
 
-        console.log('shelfToBooksMapping', shelfToBooksMapping);
-        console.log('bookIdToShelfMapping', bookIdToShelfMapping);
-
         const shelves = this.orderShelves(shelfToBooksMapping, VALID_BOOKSHELVES)
         this.setState({
           shelves,
@@ -72,8 +74,12 @@ class BooksApp extends React.Component {
     return (
       <Router>
         <div className="app">
-          <Route exact path="/" render={ () => <HomePage shelves={this.state.shelves} /> }/>
-          <Route exact path="/search" render={ () => <SearchPage bookShelfMappings={this.state.bookShelfMappings} /> }/>
+          <Route exact path="/" render={
+            () => <HomePage changeShelf={this.changeShelf} shelves={this.state.shelves} />
+          }/>
+          <Route exact path="/search" render={
+            () => <SearchPage changeShelf={this.changeShelf} bookShelfMappings={this.state.bookShelfMappings} /> }
+          />
         </div>
       </Router>
     )
