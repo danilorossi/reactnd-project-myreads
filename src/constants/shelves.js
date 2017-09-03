@@ -1,4 +1,5 @@
-export const bookshelfDefinition = [{
+// TODO make immutable
+export const VALID_BOOKSHELVES = [{
     id: 'currentlyReading',
     name: 'Currently Reading'
   }, {

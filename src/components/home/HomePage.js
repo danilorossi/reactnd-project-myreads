@@ -4,34 +4,20 @@ import { PropTypes } from 'prop-types'
 
 import BookShelf from './BookShelf'
 
-import { reduceToDictionaryByField } from '../../utils/arrayUtils.js'
-import { bookshelfDefinition } from '../../constants/bookshelf'
-
 class HomePage extends React.Component {
 
-  getShelves(bookshelfDefinition, booksCollection = []) {
-    if(!booksCollection) return [];
-
-    const dictionary = reduceToDictionaryByField(booksCollection, 'shelf');
-
-    let shelves = [];
-    bookshelfDefinition.forEach( bookshelf => {
-      const books = [];
-      dictionary[bookshelf.id].forEach( book => { books.push(book) } )
-      shelves.push({
-        id: bookshelf.id,
-        name: bookshelf.name,
-        books
-      })
-    })
-
-    return shelves;
-  }
-
   render() {
-
-    const shelves = this.props.booksCollection.length > 0 ?
-      this.getShelves(bookshelfDefinition, this.props.booksCollection) : null;
+    // const shelves = this.props.shelves
+    // console.log(shelves)
+    // const sortedShelves = (shelves && Object.keys(shelves).length > 0) ?
+    //   validBookshelves.map(
+    //     bookshelf => (
+    //       <BookShelf
+    //         key={bookshelf.id}
+    //         name={bookshelf.name}
+    //         books={shelves[bookshelf.id]} />
+    //     )
+    //   ) : []
 
     return (
       <div className="list-books">
@@ -42,9 +28,12 @@ class HomePage extends React.Component {
 
         <div className="list-books-content">
           <div>
-            { shelves && shelves.map( shelf => (
-              <BookShelf key={shelf.id} name={shelf.name} books={shelf.books}/>)
-            )}
+            { this.props.shelves && this.props.shelves.map(shelf => (
+              <BookShelf
+                key={shelf.id}
+                name={shelf.name}
+                books={shelf.books} />
+            ))}
           </div>
         </div>
 
@@ -59,7 +48,13 @@ class HomePage extends React.Component {
 }
 
 HomePage.propTypes = {
-  booksCollection: PropTypes.array.isRequired
+  shelves: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      books: PropTypes.arrayOf(PropTypes.object).isRequired // TODO define structure?
+    })
+  ).isRequired
 };
 
 export default HomePage;

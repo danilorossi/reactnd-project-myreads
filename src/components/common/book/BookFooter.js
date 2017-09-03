@@ -6,7 +6,7 @@ class BookFooter extends React.Component {
     return (
       <div className="book-footer">
         <div className="book-title">{ this.props.title }</div>
-        {this.props.authors.map( (author, i) => <div key={i} className="book-authors">{ author }</div> )}
+        <div className="book-authors">{ this.props.authors.join(', ') }</div>
       </div>
     )
   }
