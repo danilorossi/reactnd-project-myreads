@@ -17,7 +17,7 @@ class SearchPage extends React.Component {
   constructor(props) {
     super(props)
     this.onQueryChange = this.onQueryChange.bind(this)
-    this.searchBooks = debounce(500)(this.searchBooks)
+    this.searchBooks = debounce(200)(this.searchBooks)
   }
 
   componentDidMount() {
@@ -80,10 +80,12 @@ class SearchPage extends React.Component {
         <div className="search-books-results">
 
           { this.state.books && <BookShelf books={this.state.books} /> }
-          { /* TODO indicate loading and no results */
-
-            this.state.noBooksFound && <h4>No books found</h4>
+          { this.state.noBooksFound &&
+            <div className="no-books-found-message">
+              <span>No books found!</span>
+            </div>
           }
+          
         </div>
       </div>
     )
