@@ -13,12 +13,12 @@ class BookShelf extends React.Component {
         <div className="bookshelf-books">
           <ol className="books-grid">
 
-              {this.props.books.map( book => (
+              {this.props.books.map( book => ( // TODO get the fields in a smarter way
                 <li key={book.id}>
                   <Book
                     meta={{
                       imageURL: book.imageLinks.smallThumbnail,
-                      title : book.title,
+                      title   : book.title,
                       authors : book.authors
                     }} />
                 </li>
@@ -34,8 +34,10 @@ class BookShelf extends React.Component {
 BookShelf.propTypes = {
   name: PropTypes.string.isRequired,
   books: PropTypes.arrayOf(
-    PropTypes.shape({
-      imageLinks: PropTypes.object.isRequired, // TODO define object
+    PropTypes.shape({ // TODO these are 'AT LEAST' props
+      imageLinks: PropTypes.shape({
+        smallThumbnail: PropTypes.string.isRequired
+      }).isRequired,
       title: PropTypes.string.isRequired,
       authors: PropTypes.arrayOf(PropTypes.string).isRequired
     })

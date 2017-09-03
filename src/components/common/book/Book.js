@@ -4,7 +4,7 @@ import { PropTypes } from 'prop-types'
 import BookCover from './BookCover'
 import BookFooter from './BookFooter'
 import BookShelfPicker from './BookShelfPicker'
-import { bookshelfDefinition } from '../../../constants/bookshelf'
+import { VALID_BOOKSHELVES } from '../../../constants/shelves'
 
 class Book extends React.Component {
 
@@ -17,8 +17,7 @@ class Book extends React.Component {
 
           <BookCover imageURL={this.props.meta.imageURL} />
 
-          <BookShelfPicker
-            shelves={bookshelfDefinition} />
+          <BookShelfPicker shelves={VALID_BOOKSHELVES} />
 
         </div>
 

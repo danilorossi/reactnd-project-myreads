@@ -4,7 +4,6 @@ import { PropTypes } from 'prop-types'
 class BookCover extends React.Component {
 
   render() {
-    console.log(': ' + this.props.imageURL)
     return (
       <div className="book-cover"
         style={{
