@@ -17,6 +17,8 @@ class BookShelf extends React.Component {
                 <li key={book.id}>
                   <Book
                     meta={{
+                      id: book.id,
+                      shelf: book.shelf,
                       imageURL: book.imageLinks.smallThumbnail,
                       title   : book.title,
                       authors : (book.authors || [])

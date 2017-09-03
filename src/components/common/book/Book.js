@@ -17,7 +17,9 @@ class Book extends React.Component {
 
           <BookCover imageURL={this.props.meta.imageURL} />
 
-          <BookShelfPicker shelves={VALID_BOOKSHELVES} />
+          <BookShelfPicker
+            currentShelf={this.props.meta.shelf}
+            shelves={VALID_BOOKSHELVES} />
 
         </div>
 
@@ -33,6 +35,8 @@ class Book extends React.Component {
 Book.propTypes = {
 
   meta: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    shelf: PropTypes.string.isRequired,
     imageURL: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     authors: PropTypes.arrayOf(PropTypes.string).isRequired

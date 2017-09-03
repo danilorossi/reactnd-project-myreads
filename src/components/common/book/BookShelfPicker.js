@@ -2,11 +2,26 @@ import React from 'react'
 import { PropTypes } from 'prop-types'
 
 class BookShelfPicker extends React.Component {
-  
+
+  state = {
+    currentShelf: 'none'
+  }
+
+  componentDidMount() {
+    this.setState({
+      currentShelf: this.props.currentShelf
+    })
+  }
+
+  onShelfChange(event) {
+    console.log('TODO, get from props')
+  }
+
   render() {
+
     return (
       <div className="book-shelf-changer">
-        <select>
+        <select onChange={this.onShelfChange} value={this.state.currentShelf}>
           <option value="none" disabled>Move to...</option>
           {this.props.shelves.map( shelf =>
             <option key={ shelf.id } value={ shelf.id }>{ shelf.name }</option>
@@ -19,6 +34,7 @@ class BookShelfPicker extends React.Component {
 }
 
 BookShelfPicker.propTypes = {
+  currentShelf: PropTypes.string.isRequired,
   shelves: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.string.isRequired,

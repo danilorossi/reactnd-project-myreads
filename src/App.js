@@ -17,16 +17,20 @@ import * as BooksAPI from './BooksAPI'
 class BooksApp extends React.Component {
 
   state = {
-
+    // TODO and pass it to search page ? idToShelfMapping: {},
     shelves: [
       // { id, name, books }
-    ]
+    ],
+    bookShelfMappings: {
+
+    }
   }
 
   changeShelf(book) {
     // TODO
     // remove book from current shelf
     // add it to new shelf
+    // ? update idToShelfMapping ?
   }
 
   orderShelves(shelvesDictionary, validBookshelves) {
@@ -44,10 +48,22 @@ class BooksApp extends React.Component {
     BooksAPI
       .getAll()
       .then(booksCollection => {
-        const shelvesDictionary = reduceToDictionaryByField(booksCollection, 'shelf')
-        const shelves = this.orderShelves(shelvesDictionary, VALID_BOOKSHELVES)
+
+        const shelfToBooksMapping = reduceToDictionaryByField(booksCollection, 'shelf')
+
+        const bookIdToShelfMapping = {};
+        booksCollection.forEach(book => {
+          bookIdToShelfMapping[book.id] = book.shelf;
+
+        })
+
+        console.log('shelfToBooksMapping', shelfToBooksMapping);
+        console.log('bookIdToShelfMapping', bookIdToShelfMapping);
+
+        const shelves = this.orderShelves(shelfToBooksMapping, VALID_BOOKSHELVES)
         this.setState({
-          shelves
+          shelves,
+          bookShelfMappings: bookIdToShelfMapping
         })
       })
   }
@@ -57,7 +73,7 @@ class BooksApp extends React.Component {
       <Router>
         <div className="app">
           <Route exact path="/" render={ () => <HomePage shelves={this.state.shelves} /> }/>
-          <Route exact path="/search" component={SearchPage}/>
+          <Route exact path="/search" render={ () => <SearchPage bookShelfMappings={this.state.bookShelfMappings} /> }/>
         </div>
       </Router>
     )
