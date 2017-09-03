@@ -1,7 +1,7 @@
 import React from 'react'
 import { PropTypes } from 'prop-types'
 
-import Book from '../common/book/Book'
+import Book from '../book/Book'
 
 class BookShelf extends React.Component {
 
@@ -9,7 +9,7 @@ class BookShelf extends React.Component {
 
     return (
       <div className="bookshelf">
-        <h2 className="bookshelf-title">{this.props.name}</h2>
+        {this.props.name && <h2 className="bookshelf-title">{this.props.name}</h2>}
         <div className="bookshelf-books">
           <ol className="books-grid">
 
@@ -19,7 +19,7 @@ class BookShelf extends React.Component {
                     meta={{
                       imageURL: book.imageLinks.smallThumbnail,
                       title   : book.title,
-                      authors : book.authors
+                      authors : (book.authors || [])
                     }} />
                 </li>
               ))}
@@ -32,8 +32,9 @@ class BookShelf extends React.Component {
 }
 
 BookShelf.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   books: PropTypes.arrayOf(
+    // TODO default thumbnail
     PropTypes.shape({ // TODO these are 'AT LEAST' props
       imageLinks: PropTypes.shape({
         smallThumbnail: PropTypes.string.isRequired
