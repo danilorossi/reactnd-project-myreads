@@ -19,9 +19,9 @@ class BookShelf extends React.Component {
                     meta={{
                       id: book.id,
                       shelf: book.shelf,
-                      imageURL: book.imageLinks.smallThumbnail,
+                      imageURL: book.imageLinks ? book.imageLinks.smallThumbnail : undefined,
                       title   : book.title,
-                      authors : (book.authors || [])
+                      authors : book.authors
                     }} />
                 </li>
               ))}
@@ -38,11 +38,13 @@ BookShelf.propTypes = {
   books: PropTypes.arrayOf(
     // TODO default thumbnail
     PropTypes.shape({ // TODO these are 'AT LEAST' props
+      // id: PropTypes.string.isRequired,
+      // shelf: PropTypes.string.isRequired,
       imageLinks: PropTypes.shape({
-        smallThumbnail: PropTypes.string.isRequired
-      }).isRequired,
+        smallThumbnail: PropTypes.string
+      }),
       title: PropTypes.string.isRequired,
-      authors: PropTypes.arrayOf(PropTypes.string).isRequired
+      authors: PropTypes.arrayOf(PropTypes.string)
     })
   ).isRequired
 };

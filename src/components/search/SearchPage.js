@@ -10,7 +10,8 @@ class SearchPage extends React.Component {
 
   state = {
     query: '',
-    books: []
+    books: [],
+    noBooksFound: false
   }
 
   constructor(props) {
@@ -24,17 +25,24 @@ class SearchPage extends React.Component {
   }
 
   searchBooks(query) {
+    this.setState({ noBooksFound: false })
     BooksAPI
       .search(query, 20) // TODO invalid keyword return error or forbidden?
       .then(books => {
-        console.log(books)
         if(books.error) {
-          console.warn(books.error)
+          this.setState({ books: [], noBooksFound: true })
           return;
         }
-        this.setState({ books })
+        this.setState({
+          books: books.map(
+            book => Object.assign({}, book, { shelf: this.props.bookShelfMappings[book.id] || 'none' })
+          )
+        })
       })
-      .catch(err => console.warn('CATCH', err))
+      .catch(err => {
+        console.error('Error while searching', err)
+        this.setState({ books: [], noBooksFound: true })
+      })
   }
 
   onQueryChange(event) {
@@ -45,9 +53,8 @@ class SearchPage extends React.Component {
     } else {
       this.setState({ books: '' });
     }
-
-
   }
+
   render() {
     return (
       <div className="search-books">
@@ -73,7 +80,10 @@ class SearchPage extends React.Component {
         <div className="search-books-results">
 
           { this.state.books && <BookShelf books={this.state.books} /> }
-          { /* TODO indicate loading and no results */}
+          { /* TODO indicate loading and no results */
+
+            this.state.noBooksFound && <h4>No books found</h4>
+          }
         </div>
       </div>
     )

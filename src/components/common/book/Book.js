@@ -37,9 +37,9 @@ Book.propTypes = {
   meta: PropTypes.shape({
     id: PropTypes.string.isRequired,
     shelf: PropTypes.string.isRequired,
-    imageURL: PropTypes.string.isRequired,
+    imageURL: PropTypes.string,
     title: PropTypes.string.isRequired,
-    authors: PropTypes.arrayOf(PropTypes.string).isRequired
+    authors: PropTypes.arrayOf(PropTypes.string)
   }).isRequired
 
 };

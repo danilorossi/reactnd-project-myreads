@@ -17,12 +17,13 @@ class BookCover extends React.Component {
 }
 
 BookCover.propTypes = {
-  imageURL: PropTypes.string.isRequired,
+  imageURL: PropTypes.string,
   imageWidth: PropTypes.number,
   imageHeight: PropTypes.number,
 };
 
 BookCover.defaultProps = {
+  imageURL: '/assets/default-bookcover-thumb.jpg',
   imageWidth: 128,
   imageHeight: 193
 };

@@ -14,7 +14,12 @@ class BookFooter extends React.Component {
 
 BookFooter.propTypes = {
   title: PropTypes.string.isRequired,
-  authors: PropTypes.array.isRequired,
+  authors: PropTypes.array,
+};
+
+
+BookFooter.defaultProps = {
+  authors: ['Unknown author']
 };
 
 export default BookFooter;

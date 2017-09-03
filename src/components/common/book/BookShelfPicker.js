@@ -9,7 +9,7 @@ class BookShelfPicker extends React.Component {
 
   componentDidMount() {
     this.setState({
-      currentShelf: this.props.currentShelf
+      currentShelf: this.props.currentShelf || 'none'
     })
   }
 
@@ -22,7 +22,7 @@ class BookShelfPicker extends React.Component {
     return (
       <div className="book-shelf-changer">
         <select onChange={this.onShelfChange} value={this.state.currentShelf}>
-          <option value="none" disabled>Move to...</option>
+          <option disabled>Move to...</option>
           {this.props.shelves.map( shelf =>
             <option key={ shelf.id } value={ shelf.id }>{ shelf.name }</option>
           )}
