@@ -1,28 +1,29 @@
-import React from 'react'
-import { PropTypes } from 'prop-types'
+import React from 'react';
+import { PropTypes } from 'prop-types';
 
-class BookCover extends React.Component {
+/** React stateless functional component that represents a book cover. */
+const BookCover = ({ imageWidth, imageHeight, imageURL }) => {
+  return (
+    <div className="book-cover"
+      style={{
+        width: imageWidth,
+        height: imageHeight,
+        backgroundImage: `url("${imageURL}")`
+      }}>
+    </div>
+  )
+};
 
-  render() {
-    return (
-      <div className="book-cover"
-        style={{
-          width: this.props.imageWidth,
-          height: this.props.imageHeight,
-          backgroundImage: `url("${ this.props.imageURL }")`
-        }}>
-      </div>
-    )
-  }
-}
-
+/** PropTypes */
 BookCover.propTypes = {
-  imageURL: PropTypes.string.isRequired,
+  imageURL: PropTypes.string,
   imageWidth: PropTypes.number,
   imageHeight: PropTypes.number,
 };
 
+/** Default values */
 BookCover.defaultProps = {
+  imageURL: '/assets/default-bookcover-thumb.jpg',
   imageWidth: 128,
   imageHeight: 193
 };
