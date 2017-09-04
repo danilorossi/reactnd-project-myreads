@@ -1,4 +1,6 @@
 {
+  "name": "reactnd-project-myreads",
+  "author": "Danilo Rossi <contact@danilorossi.me> (http://danilorossi.me/)",
   "dependencies": {
     "prop-types": "15.5.8",
     "react": "15.5.4",
@@ -23,5 +25,5 @@
     "ghooks": {
       "commit-msg": "validate-commit-msg"
     }
-  }
+  } 
 }
