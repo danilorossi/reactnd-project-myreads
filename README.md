@@ -17,7 +17,7 @@ There are also other commands inherited from [create-react-app](https://github.c
 
 ## What You're Getting
 
-In addition to the original packages, the follwing packages have been included:
+In addition to the original packages, the following ones have been included:
 
 * `react-router-dom` to manage routing
 * `validate-commit-msg` to be consistent with the required commit message format
