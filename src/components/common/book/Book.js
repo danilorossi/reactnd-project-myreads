@@ -39,7 +39,7 @@ class Book extends React.Component {
   }
 
   updateShelf(shelf) {
-    this.props.changeShelf({
+    return this.props.changeShelf({
       newShelf: shelf,
       book: this.props.book
     })

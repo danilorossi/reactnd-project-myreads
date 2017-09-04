@@ -20,20 +20,25 @@ class BookShelfPicker extends React.Component {
 
   onShelfChange(event) {
     const newShelf = event.target.value
-    this.props.updateShelf(newShelf)
-    this.setState({currentShelf: newShelf})
+    this.props
+      .updateShelf(newShelf)
+      .then(newShelf => this.refs.select && this.setState({currentShelf: newShelf}))
   }
 
   render() {
-
     return (
       <div className="book-shelf-changer">
-        <select onChange={this.onShelfChange} value={this.state.currentShelf}>
+        <select
+          ref="select"
+          onChange={this.onShelfChange}
+          value={this.state.currentShelf}>
+
           <option disabled>Move to...</option>
           {this.props.shelves.map( shelf =>
             <option key={ shelf.id } value={ shelf.id }>{ shelf.name }</option>
           )}
           <option value="none">None</option>
+
         </select>
       </div>
     )

@@ -33,34 +33,38 @@ class BooksApp extends React.Component {
 
   changeShelf(data) {
 
-    const { book, newShelf } = data;
+    return new Promise((resolve, reject) => {
+      const { book, newShelf } = data;
 
-    BooksAPI
-      .update(book, newShelf)
-      .then(response => {
-        // new book
-        if(!book.shelf || book.shelf === 'none') {
+      BooksAPI
+        .update(book, newShelf)
+        .then(response => {
+          // new book
+          if(!book.shelf || book.shelf === 'none') {
 
-          this.booksCache = [
-            ...this.booksCache,
-            Object.assign({}, book, { shelf: newShelf })
-          ];
+            this.booksCache = [
+              ...this.booksCache,
+              Object.assign({}, book, { shelf: newShelf })
+            ];
 
-        } else if(newShelf === 'none') { // remove book from all shelves
+          } else if(newShelf === 'none') { // remove book from all shelves
 
-          this.booksCache = this.booksCache.filter(b => b.id !== book.id)
+            this.booksCache = this.booksCache.filter(b => b.id !== book.id)
 
-        } else { // just change shelf
+          } else { // just change shelf
 
-          this.booksCache = [
-            ...this.booksCache.filter(b => b.id !== book.id),
-            Object.assign({}, book, { shelf: newShelf })
-          ];
+            this.booksCache = [
+              ...this.booksCache.filter(b => b.id !== book.id),
+              Object.assign({}, book, { shelf: newShelf })
+            ];
 
-        }
+          }
 
-        this.createInitialState(this.booksCache);
-      })
+          this.createInitialState(this.booksCache);
+          resolve(newShelf)
+        })
+    })
+
   }
 
   orderShelves(shelvesDictionary, validBookshelves) {
