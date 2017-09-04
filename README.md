@@ -17,16 +17,14 @@ There are also other commands inherited from [create-react-app](https://github.c
 
 ## What You're Getting
 
-This structure below is a bit different from the original starter project as this is not a scaffolding project but a working application.
-
-In addition to the original packages, I have included:
+In addition to the original packages, the follwing packages have been included:
 
 * `react-router-dom` to manage routing
 * `validate-commit-msg` to be consistent with the required commit message format
 * `ghooks` to prevent from committing with a wrong message format
 
-This is the project structure:
-I
+This is the current project structure:
+
 ```bash
 ├── CONTRIBUTING.md
 ├── README.md - This file.
@@ -57,6 +55,9 @@ I
 ```
 
 
+## Backend
+
+The backend service and JavaScript API is provided by Udacity: check [docs/BACKEND.md](docs/BACKEND.md) for more details.
 
 ## Create React App
 
