@@ -30,12 +30,37 @@ class BooksApp extends React.Component {
     super(props)
     this.changeShelf = this.changeShelf.bind(this)
   }
-  changeShelf(shelf, book) {
-    console.log('TODO changeShelf', shelf, book);
-    // TODO
-    // remove book from current shelf
-    // add it to new shelf
-    // ? update idToShelfMapping ?
+
+  changeShelf(data) {
+
+    const { book, newShelf } = data;
+
+    BooksAPI
+      .update(book, newShelf)
+      .then(response => {
+        // new book
+        if(!book.shelf || book.shelf === 'none') {
+
+          this.booksCache = [
+            ...this.booksCache,
+            Object.assign({}, book, { shelf: newShelf })
+          ];
+
+        } else if(newShelf === 'none') { // remove book from all shelves
+
+          this.booksCache = this.booksCache.filter(b => b.id !== book.id)
+
+        } else { // just change shelf
+
+          this.booksCache = [
+            ...this.booksCache.filter(b => b.id !== book.id),
+            Object.assign({}, book, { shelf: newShelf })
+          ];
+
+        }
+
+        this.createInitialState(this.booksCache);
+      })
   }
 
   orderShelves(shelvesDictionary, validBookshelves) {
@@ -44,30 +69,36 @@ class BooksApp extends React.Component {
         bookshelf => ({
             id: bookshelf.id,
             name: bookshelf.name,
-            books: shelvesDictionary[bookshelf.id]
+            books: shelvesDictionary[bookshelf.id] || []
         })
       ) : []
   }
+
+  booksCache = null;
 
   componentDidMount() {
     BooksAPI
       .getAll()
       .then(booksCollection => {
-
-        const shelfToBooksMapping = reduceToDictionaryByField(booksCollection, 'shelf')
-
-        const bookIdToShelfMapping = {};
-        booksCollection.forEach(book => {
-          bookIdToShelfMapping[book.id] = book.shelf;
-
-        })
-
-        const shelves = this.orderShelves(shelfToBooksMapping, VALID_BOOKSHELVES)
-        this.setState({
-          shelves,
-          bookShelfMappings: bookIdToShelfMapping
-        })
+        this.booksCache = booksCollection;
+        this.createInitialState(this.booksCache);
       })
+  }
+
+  createInitialState(booksCollection) {
+    const shelfToBooksMapping = reduceToDictionaryByField(booksCollection, 'shelf')
+
+    const bookIdToShelfMapping = {};
+    booksCollection.forEach(book => {
+      bookIdToShelfMapping[book.id] = book.shelf;
+
+    })
+
+    const shelves = this.orderShelves(shelfToBooksMapping, VALID_BOOKSHELVES)
+    this.setState({
+      shelves,
+      bookShelfMappings: bookIdToShelfMapping
+    })
   }
 
   render() {

@@ -17,13 +17,7 @@ class BookShelf extends React.Component {
                 <li key={book.id}>
                   <Book
                     changeShelf={this.props.changeShelf}
-                    meta={{
-                      id: book.id,
-                      shelf: book.shelf,
-                      imageURL: book.imageLinks ? book.imageLinks.smallThumbnail : undefined,
-                      title   : book.title,
-                      authors : book.authors
-                    }} />
+                    book={book} />
                 </li>
               ))}
 
@@ -36,18 +30,7 @@ class BookShelf extends React.Component {
 
 BookShelf.propTypes = {
   name: PropTypes.string,
-  books: PropTypes.arrayOf(
-    // TODO default thumbnail
-    PropTypes.shape({ // TODO these are 'AT LEAST' props
-      // id: PropTypes.string.isRequired,
-      // shelf: PropTypes.string.isRequired,
-      imageLinks: PropTypes.shape({
-        smallThumbnail: PropTypes.string
-      }),
-      title: PropTypes.string.isRequired,
-      authors: PropTypes.arrayOf(PropTypes.string)
-    })
-  ).isRequired,
+  books: PropTypes.arrayOf(PropTypes.object).isRequired,
   changeShelf: PropTypes.func.isRequired,
 };
 

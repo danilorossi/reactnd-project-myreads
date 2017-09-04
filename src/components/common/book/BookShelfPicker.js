@@ -11,6 +11,7 @@ class BookShelfPicker extends React.Component {
     super(props)
     this.onShelfChange = this.onShelfChange.bind(this)
   }
+
   componentDidMount() {
     this.setState({
       currentShelf: this.props.currentShelf || 'none'
@@ -18,9 +19,9 @@ class BookShelfPicker extends React.Component {
   }
 
   onShelfChange(event) {
-    // TODO should update state, or wait for data to flow down?
-    console.log('update picker state - maybe')
-    this.props.changeShelf(event.target.value, this.props.bookId)
+    const newShelf = event.target.value
+    this.props.updateShelf(newShelf)
+    this.setState({currentShelf: newShelf})
   }
 
   render() {
@@ -40,7 +41,6 @@ class BookShelfPicker extends React.Component {
 }
 
 BookShelfPicker.propTypes = {
-  bookId: PropTypes.string.isRequired,
   currentShelf: PropTypes.string.isRequired,
   shelves: PropTypes.arrayOf(
       PropTypes.shape({
@@ -48,7 +48,7 @@ BookShelfPicker.propTypes = {
         name: PropTypes.string.isRequired
       })
     ).isRequired,
-  changeShelf: PropTypes.func.isRequired
+  updateShelf: PropTypes.func.isRequired
 };
 
 export default BookShelfPicker;

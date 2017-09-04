@@ -21,6 +21,10 @@ class SearchPage extends React.Component {
     this.searchBooks = debounce(200)(this.searchBooks)
   }
 
+  componentDidMount(){
+    this.queryInput.focus();
+  }
+
   searchBooks(query) {
     this.setState({ noBooksFound: false })
     BooksAPI
@@ -69,6 +73,7 @@ class SearchPage extends React.Component {
             <input
               type="text"
               placeholder="Search by title or author"
+              ref={ input => { this.queryInput = input }}
               value={this.state.query}
               onChange={this.onQueryChange}/>
 
