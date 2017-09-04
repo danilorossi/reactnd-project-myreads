@@ -1,33 +1,39 @@
-import React from 'react'
-import { PropTypes } from 'prop-types'
+import React from 'react';
+import { PropTypes } from 'prop-types';
 
-import Book from '../book/Book'
+/** Book component */
+import Book from '../book/Book';
 
-class BookShelf extends React.Component {
+/**
+ * React stateless functional component component that represents a BookShelf,
+ * with a title and a list of books.
+ */
+const BookShelf = ({ name, books, changeShelf }) => {
+  return (
+    <div className="bookshelf">
 
-  render() {
+      {/* The bookshelf name */}
+      { name && <h2 className="bookshelf-title">{ name }</h2>}
 
-    return (
-      <div className="bookshelf">
-        {this.props.name && <h2 className="bookshelf-title">{this.props.name}</h2>}
-        <div className="bookshelf-books">
-          <ol className="books-grid">
+      <div className="bookshelf-books">
+        <ol className="books-grid">
 
-              {this.props.books.map( book => ( // TODO get the fields in a smarter way
-                <li key={book.id}>
-                  <Book
-                    changeShelf={this.props.changeShelf}
-                    book={book} />
-                </li>
-              ))}
+          {/* Draw the books */}
+          {books.map( book => (
+            <li key={book.id}>
+              <Book
+                changeShelf={ changeShelf }
+                book={book} />
+            </li>
+          ))}
 
-          </ol>
-        </div>
+        </ol>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
+/** PropTypes */
 BookShelf.propTypes = {
   name: PropTypes.string,
   books: PropTypes.arrayOf(PropTypes.object).isRequired,

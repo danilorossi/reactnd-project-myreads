@@ -1,23 +1,23 @@
 import React from 'react'
 import { PropTypes } from 'prop-types'
 
-class BookFooter extends React.Component {
-  render() {
-    return (
-      <div className="book-footer">
-        <div className="book-title">{ this.props.title }</div>
-        <div className="book-authors">{ this.props.authors.join(', ') }</div>
-      </div>
-    )
-  }
+/** React stateless functional component that represents a footer. */
+const BookFooter = ({ title, authors }) => {
+  return (
+    <div className="book-footer">
+      <div className="book-title">{ title }</div>
+      <div className="book-authors">{ authors.join(', ') }</div>
+    </div>
+  )
 }
 
+/** PropTypes */
 BookFooter.propTypes = {
   title: PropTypes.string.isRequired,
   authors: PropTypes.array,
 };
 
-
+/** Default values */
 BookFooter.defaultProps = {
   authors: ['Unknown author']
 };

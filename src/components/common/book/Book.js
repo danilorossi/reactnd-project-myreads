@@ -1,28 +1,70 @@
-import React from 'react'
-import { PropTypes } from 'prop-types'
+import React from 'react';
+import { PropTypes } from 'prop-types';
 
-import BookCover from './BookCover'
-import BookFooter from './BookFooter'
-import BookShelfPicker from './BookShelfPicker'
-import { VALID_BOOKSHELVES } from '../../../constants/shelves'
+/** BookCover component */
+import BookCover from './BookCover';
 
+/** BookFooter component */
+import BookFooter from './BookFooter';
+
+/** BookShelfPicker component */
+import BookShelfPicker from './BookShelfPicker';
+
+/** List of valid shelves, in the order we want to show them in the homepage */
+import { VALID_BOOKSHELVES } from '../../../constants/shelves';
+
+/** React component that represents a Book. */
 class Book extends React.Component {
+
+  /**
+  * @description Book React component
+  * @constructor
+  * @param {object} props - React props
+  */
   constructor(props){
-    super(props)
-    this.updateShelf = this.updateShelf.bind(this)
+    // Super constructor
+    super(props);
+    // Bind to the current context
+    this.updateShelf = this.updateShelf.bind(this);
   }
+
+  /**
+  * @description Update this book shelf.
+  * @param {string} shelf - The new shelf ID for this book.
+  * @returns {Promise} A promise that resolves with the new updated shelf
+  */
+  updateShelf(shelf) {
+    // Call the callback with the book data and the new shelf
+    return this.props.changeShelf(this.props.book, shelf);
+  }
+
+  /**
+  * @description render hook.
+  */
   render() {
+
+    // Ref for book prop
     const book = this.props.book;
-    const imageUrl = book.imageLinks && book.imageLinks.smallThumbnail ? book.imageLinks.smallThumbnail : undefined
+
+    // Set default image if no imageLinks are given
+    const imageUrl = book.imageLinks && book.imageLinks.smallThumbnail ? book.imageLinks.smallThumbnail : undefined;
 
     return (
+
       <div className="book">
 
         <div className="book-top">
 
-          <BookCover
-            imageURL={imageUrl} />
+          {/* The book cover component */}
+          <BookCover imageURL={imageUrl} />
 
+          {/*
+            * The book shelf picker component.
+            * Receives:
+            * - the list of valid shelves
+            * - the current shelf this book belongs to
+            * - a callback to update the shelf
+            */}
           <BookShelfPicker
             updateShelf={this.updateShelf}
             currentShelf={book.shelf}
@@ -30,6 +72,7 @@ class Book extends React.Component {
 
         </div>
 
+        {/* The book footer component */}
         <BookFooter
           title={book.title}
           authors={book.authors} />
@@ -38,18 +81,13 @@ class Book extends React.Component {
     )
   }
 
-  updateShelf(shelf) {
-    return this.props.changeShelf({
-      newShelf: shelf,
-      book: this.props.book
-    })
-  }
+
 }
 
+/** PropTypes */
 Book.propTypes = {
   changeShelf: PropTypes.func.isRequired,
   book: PropTypes.object.isRequired
-
 };
 
 export default Book;
