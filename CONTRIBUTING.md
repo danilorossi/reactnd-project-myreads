@@ -1,3 +1,3 @@
 # How to contribute
 
-The files in this repository are used in the course videos and are the starting point for all students. Because we want all students to have the same experience going through course, if your pull request alters any of the core files, then it (most likely) will _not_ be merged into the project.
+This project is an assesment for the [Udacity's React course](https://www.udacity.com/course/react-nanodegree--nd019) Fundamentals section: feel free to suggest improvements or changes, as long as the tone is a constructive debate with the sole purpose of learning :)
