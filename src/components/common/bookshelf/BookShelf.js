@@ -10,10 +10,16 @@ import Book from '../book/Book';
  */
 const BookShelf = ({ name, books, changeShelf }) => {
   return (
-    <div className="bookshelf">
+    <div>
 
       {/* The bookshelf name */}
-      { name && <h2 className="bookshelf-title">{ name }</h2>}
+      { name && (
+        <nav>
+          <div className="teal lighten-3 nav-wrapper">
+            <a className="brand-logo center">{ name }</a>
+          </div>
+        </nav>
+      )}
 
       <div className="bookshelf-books">
         <ol className="books-grid">

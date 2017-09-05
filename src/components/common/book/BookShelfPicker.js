@@ -1,6 +1,9 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
+import ReactDOM from 'react-dom'
+import $ from 'jquery';
 
+window['$'] = $;
 /** React component that represents the shelf picker control. */
 class BookShelfPicker extends React.Component {
 
@@ -29,6 +32,16 @@ class BookShelfPicker extends React.Component {
     this.setState({
       currentShelf: this.props.currentShelf || 'none'
     });
+     $((this.refs.select)).dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrainWidth: false, // Does not change width of dropdown to that of the activator
+      hover: false, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: true, // Displays dropdown below the button
+      alignment: 'right', // Displays dropdown with edge aligned to the left of button
+      stopPropagation: false // Stops event propagation
+    });
   }
 
   /**
@@ -54,22 +67,16 @@ class BookShelfPicker extends React.Component {
     return (
       <div className="book-shelf-changer">
 
-        {/* Shelves select */}
-        <select
-          ref="select"
-          onChange={this.onShelfChange}
-          value={this.state.currentShelf}>
+        <a className='dropdown-button btn-floating btn-small waves-effect waves-light' ref="select" data-activates='dropdown1'><i className="material-icons">add</i></a>
+        <ul id='dropdown1' className='dropdown-content'>
+        {this.props.shelves.map( shelf =>
+          <li key={ shelf.id }><a>{ shelf.name }</a></li>
+        )}
 
-          {/* Disable option used as a title for the dropdown */}
-          <option disabled>Move to...</option>
-          {/* Dynamically build select using valid shelves */}
-          {this.props.shelves.map( shelf =>
-            <option key={ shelf.id } value={ shelf.id }>{ shelf.name }</option>
-          )}
-          {/* Default value for books that do not belong to any shelf */}
-          <option value="none">None</option>
 
-        </select>
+      </ul>
+
+
 
       </div>
     )

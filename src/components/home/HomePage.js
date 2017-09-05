@@ -16,12 +16,13 @@ class HomePage extends React.Component {
     return (
       <div className="list-books">
 
-        <div className="list-books-title">
-          <h1>MyReads</h1>
-        </div>
+        <nav>
+          <div className="teal darken-3 nav-wrapper">
+            <a className="brand-logo center"><i className="material-icons">bookmark</i> MyReads</a>
+          </div>
+        </nav>
 
         <div className="list-books-content">
-          <div>
             {/* Loop over valid and sorted shelves */}
             {/* And draw it with the list of books */}
             { this.props.shelves && this.props.shelves.map(shelf => (
@@ -33,7 +34,6 @@ class HomePage extends React.Component {
                 )
               )
             }
-          </div>
         </div>
 
         <div className="open-search">
