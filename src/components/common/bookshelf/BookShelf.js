@@ -8,7 +8,7 @@ import Book from '../book/Book';
  * React stateless functional component component that represents a BookShelf,
  * with a title and a list of books.
  */
-const BookShelf = ({ name, books, changeShelf }) => {
+const BookShelf = ({ name, books, changeShelf, shelvesList }) => {
   return (
     <div className="bookshelf">
 
@@ -22,8 +22,9 @@ const BookShelf = ({ name, books, changeShelf }) => {
           {books.map( book => (
             <li key={book.id}>
               <Book
+                shelvesList={ shelvesList }
                 changeShelf={ changeShelf }
-                book={book} />
+                book={ book } />
             </li>
           ))}
 
@@ -38,6 +39,12 @@ BookShelf.propTypes = {
   name: PropTypes.string,
   books: PropTypes.arrayOf(PropTypes.object).isRequired,
   changeShelf: PropTypes.func.isRequired,
+  shelvesList: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired
+      })
+    ).isRequired
 };
 
 export default BookShelf;

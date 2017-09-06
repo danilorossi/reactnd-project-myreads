@@ -5,6 +5,9 @@ import { PropTypes } from 'prop-types';
 /** API for books endpoints */
 import * as BooksAPI from '../../BooksAPI';
 
+/** List of valid shelves, to populate book picker component */
+import { VALID_BOOKSHELVES } from '../../constants/shelves';
+
 /** BookShelf component */
 import BookShelf from '../common/bookshelf/BookShelf';
 
@@ -100,6 +103,7 @@ class SearchPage extends React.Component {
   * @description render hook.
   */
   render() {
+
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -127,7 +131,7 @@ class SearchPage extends React.Component {
         <div className="search-books-results">
 
           {/* We reuse the BookShelf component without the title to show the results */}
-          { this.state.books && <BookShelf changeShelf={this.props.changeShelf} books={this.state.books} /> }
+          { this.state.books && <BookShelf shelvesList={VALID_BOOKSHELVES} changeShelf={this.props.changeShelf} books={this.state.books} /> }
 
           {/* Show a message for empty results set */}
           { this.state.noBooksFound &&

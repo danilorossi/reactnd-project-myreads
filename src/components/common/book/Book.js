@@ -10,9 +10,6 @@ import BookFooter from './BookFooter';
 /** BookShelfPicker component */
 import BookShelfPicker from './BookShelfPicker';
 
-/** List of valid shelves, in the order we want to show them in the homepage */
-import { VALID_BOOKSHELVES } from '../../../constants/shelves';
-
 /** React component that represents a Book. */
 class Book extends React.Component {
 
@@ -68,7 +65,7 @@ class Book extends React.Component {
           <BookShelfPicker
             updateShelf={this.updateShelf}
             currentShelf={book.shelf}
-            shelves={VALID_BOOKSHELVES} />
+            shelves={this.props.shelvesList} />
 
         </div>
 
@@ -87,7 +84,13 @@ class Book extends React.Component {
 /** PropTypes */
 Book.propTypes = {
   changeShelf: PropTypes.func.isRequired,
-  book: PropTypes.object.isRequired
+  book: PropTypes.object.isRequired,
+  shelvesList: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired
+      })
+    ).isRequired,
 };
 
 export default Book;

@@ -5,8 +5,17 @@ import { PropTypes } from 'prop-types';
 /** BookShelf component */
 import BookShelf from '../common/bookshelf/BookShelf';
 
+/** List of valid shelves, to populate book picker component */
+import { VALID_BOOKSHELVES } from '../../constants/shelves';
+
 /** React main component for the home page. */
 class HomePage extends React.Component {
+
+
+  shelfPickerValues = [
+      ...VALID_BOOKSHELVES,
+      { id: 'none', name: 'none' }
+    ];
 
   /**
   * @description render hook.
@@ -26,6 +35,7 @@ class HomePage extends React.Component {
             {/* And draw it with the list of books */}
             { this.props.shelves && this.props.shelves.map(shelf => (
                 <BookShelf
+                  shelvesList={this.shelfPickerValues}
                   changeShelf={this.props.changeShelf}
                   key={shelf.id}
                   name={shelf.name}

@@ -66,8 +66,8 @@ class BookShelfPicker extends React.Component {
           {this.props.shelves.map( shelf =>
             <option key={ shelf.id } value={ shelf.id }>{ shelf.name }</option>
           )}
-          {/* Default value for books that do not belong to any shelf */}
-          <option value="none">None</option>
+          {/* Default value for books that do not belong to any shelf
+          <option value="none">None</option>*/}
 
         </select>
 
@@ -86,6 +86,11 @@ BookShelfPicker.propTypes = {
       })
     ).isRequired,
   updateShelf: PropTypes.func.isRequired
+};
+
+/** Default values */
+BookShelfPicker.defaultProps = {
+  showNone: true
 };
 
 export default BookShelfPicker;
