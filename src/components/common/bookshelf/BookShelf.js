@@ -21,20 +21,21 @@ const BookShelf = ({ name, books, changeShelf }) => {
         </nav>
       )}
 
-      <div className="bookshelf-books">
-        <ol className="books-grid">
 
-          {/* Draw the books */}
-          {books.map( book => (
-            <li key={book.id}>
-              <Book
-                changeShelf={ changeShelf }
-                book={book} />
-            </li>
-          ))}
+      <div className="row">
 
-        </ol>
+        {/* Draw the books */}
+        {books.map( book => (
+          <div className="col" key={book.id}>
+            <Book
+              changeShelf={ changeShelf }
+              book={book} />
+          </div>
+        ))}
+
       </div>
+
+
     </div>
   )
 }

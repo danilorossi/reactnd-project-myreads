@@ -51,35 +51,51 @@ class Book extends React.Component {
 
     return (
 
-      <div className="book">
-
-        <div className="book-top">
-
-          {/* The book cover component */}
-          <BookCover imageURL={imageUrl} />
-
-          {/*
-            * The book shelf picker component.
-            * Receives:
-            * - the list of valid shelves
-            * - the current shelf this book belongs to
-            * - a callback to update the shelf
-            */}
-          <BookShelfPicker
-            updateShelf={this.updateShelf}
-            currentShelf={book.shelf}
-            shelves={VALID_BOOKSHELVES} />
-
+      <div className="card small">
+        <div className="card-image waves-effect waves-block waves-light">
+          <img className="activator" src={imageUrl}/>
         </div>
-
-        {/* The book footer component */}
-        <BookFooter
-          title={book.title}
-          authors={book.authors} />
-
+        <div className="card-content">
+          <span className="card-title activator grey-text text-darken-4">{book.title}<i className="material-icons right">more_vert</i></span>
+          <p>{book.authors}</p>
+        </div>
+        <div className="card-reveal">
+          <span className="card-title grey-text text-darken-4">Card Title<i className="material-icons right">close</i></span>
+          <p>{book.description}</p>
+        </div>
       </div>
     )
   }
+
+
+  //
+  // <div className="book">
+  //
+  //   <div className="book-top">
+  //
+  //     {/* The book cover component */}
+  //     <BookCover imageURL={imageUrl} />
+  //
+  //     {/*
+  //       * The book shelf picker component.
+  //       * Receives:
+  //       * - the list of valid shelves
+  //       * - the current shelf this book belongs to
+  //       * - a callback to update the shelf
+  //       */}
+  //     <BookShelfPicker
+  //       updateShelf={this.updateShelf}
+  //       currentShelf={book.shelf}
+  //       shelves={VALID_BOOKSHELVES} />
+  //
+  //   </div>
+  //
+  //   {/* The book footer component */}
+  //   <BookFooter
+  //     title={book.title}
+  //     authors={book.authors} />
+  //
+  // </div>
 
 
 }
