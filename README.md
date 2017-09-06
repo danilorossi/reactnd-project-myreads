@@ -70,3 +70,7 @@ The original starter project was bootstrapped with [Create React App](https://gi
 This repository for the final assessment project for [Udacity's React course](https://www.udacity.com/course/react-nanodegree--nd019) (Fundamentals section), based on the [starter project template](https://github.com/udacity/reactnd-project-myreads-starter).
 
 For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## To-do's
+
+I am tracking future improvements in this [GitHub Project](https://github.com/danilorossi/reactnd-project-myreads/projects/1).
