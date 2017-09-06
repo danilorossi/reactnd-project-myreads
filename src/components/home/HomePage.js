@@ -14,7 +14,7 @@ class HomePage extends React.Component {
 
   shelfPickerValues = [
       ...VALID_BOOKSHELVES,
-      { id: 'none', name: 'none' }
+      { id: 'none', name: 'None' }
     ];
 
   /**

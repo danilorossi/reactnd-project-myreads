@@ -13,6 +13,11 @@ import BookShelfPicker from './BookShelfPicker';
 /** React component that represents a Book. */
 class Book extends React.Component {
 
+  /** Component state */
+  state = {
+    updating: false // On shelf change, disable picker and notify user while we get a response
+  }
+
   /**
   * @description Book React component
   * @constructor
@@ -31,8 +36,26 @@ class Book extends React.Component {
   * @returns {Promise} A promise that resolves with the new updated shelf
   */
   updateShelf(shelf) {
-    // Call the callback with the book data and the new shelf
-    return this.props.changeShelf(this.props.book, shelf);
+    // Mark book as updating
+    this.setState({ updating: true });
+
+    return new Promise((resolve, reject) => {
+      // Call the callback with the book data and the new shelf
+      this.props.changeShelf(this.props.book, shelf)
+        .then(payload => {
+            // No more updating
+            this.refs.root && this.setState({ updating: false });
+            // Pass shelf down to bookshelf
+            resolve(payload);
+        })
+        .catch(err => {
+          // In case of any error, simply show no results message and log error
+          console.error('Error while updating the shelf', err);
+          this.setState({ updating: false });
+          reject(err);
+        })
+    });
+
   }
 
   /**
@@ -48,12 +71,12 @@ class Book extends React.Component {
 
     return (
 
-      <div className="book">
+      <div ref="root" className="book">
 
         <div className="book-top">
 
           {/* The book cover component */}
-          <BookCover imageURL={imageUrl} />
+          <BookCover updating={this.state.updating} imageURL={imageUrl} />
 
           {/*
             * The book shelf picker component.
@@ -63,6 +86,7 @@ class Book extends React.Component {
             * - a callback to update the shelf
             */}
           <BookShelfPicker
+            updating={this.state.updating}
             updateShelf={this.updateShelf}
             currentShelf={book.shelf}
             shelves={this.props.shelvesList} />

@@ -67,7 +67,7 @@ class SearchPage extends React.Component {
         // If we have results, we match the results set
         // with the information about the shelves they belong to,
         // so that the search page is consistent with the home page
-        this.setState({
+        this.refs.root && this.setState({
           books: books.map(
             book => Object.assign({}, book, { shelf: this.props.bookShelfMappings[book.id] || 'none' })
           )
@@ -105,7 +105,7 @@ class SearchPage extends React.Component {
   render() {
 
     return (
-      <div className="search-books">
+      <div ref="root" className="search-books">
         <div className="search-books-bar">
 
           {/* Navigate back to home page */}
