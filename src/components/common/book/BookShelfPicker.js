@@ -51,11 +51,18 @@ class BookShelfPicker extends React.Component {
   * @description render hook.
   */
   render() {
+
+    // Disable select on shelf updating
+    const selectProps = this.props.updating ? { disabled: 'disabled' } : {};
+    // Disabled styling
+    const divClassName = `book-shelf-changer ${this.props.updating ? "disabled":""}`;
+    
     return (
-      <div className="book-shelf-changer">
+      <div className={divClassName}>
 
         {/* Shelves select */}
         <select
+          {...selectProps}
           ref="select"
           onChange={this.onShelfChange}
           value={this.state.currentShelf}>
@@ -78,6 +85,7 @@ class BookShelfPicker extends React.Component {
 
 /** PropTypes */
 BookShelfPicker.propTypes = {
+  updating: PropTypes.bool,
   currentShelf: PropTypes.string.isRequired,
   shelves: PropTypes.arrayOf(
       PropTypes.shape({
@@ -90,6 +98,7 @@ BookShelfPicker.propTypes = {
 
 /** Default values */
 BookShelfPicker.defaultProps = {
+  updating: false,
   showNone: true
 };
 
