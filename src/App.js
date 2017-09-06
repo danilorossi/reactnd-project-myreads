@@ -128,7 +128,6 @@ class BooksApp extends React.Component {
     BooksAPI
       .getAll()
       .then(booksCollection => {
-        console.log(booksCollection)
         // Save the list so that we can easily update the UI
         // when we start moving books from a shelf to another
         this.booksCache = booksCollection;

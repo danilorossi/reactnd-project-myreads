@@ -2,6 +2,8 @@
 
 This is the final assessment project for [Udacity's React course](https://www.udacity.com/course/react-nanodegree--nd019) (Fundamentals section), based on the [starter project template](https://github.com/udacity/reactnd-project-myreads-starter).
 
+**NOTE**: the project is focused on React foundamentals and routing, no testing or Redux integration. I will add tests, new features and new UI along the way.
+
 ## Getting started
 
 To get started developing right away:
